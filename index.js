@@ -99,3 +99,63 @@ const addDepartment = () => {
     
     });
 };
+let roleChoices;
+let managerChoices;
+let employeeChoices;
+
+const addEmployee = () => {
+
+  let query = 'SELECT * FROM role';
+  db.query(query,(error, res)=>{
+    roleChoices = res.map(role =>({
+      name: role.title,
+      value: role.id
+    }));
+    let query = 'SELECT * FROM employee';
+    db.query(query,(error, res)=>{
+      managerChoices = res.map(({id, first_name, last_name}) => ({
+      name: `${first_name} ${last_name}`,
+      value: id
+
+      }));
+    
+        inquirer
+          .prompt ([
+          {
+            type: "input",
+            name: "first_name",
+            message: "What is the new employee's first name?",
+          },
+          {
+            type: "input",
+            name: "last_name",
+            message: "What is the employee's last name?",
+          },
+          {
+            type: "list",
+            name: "role_id",
+            message: "What is the new employee's role?",
+            choices: roleChoices,
+          },
+          {  
+            type: "list",
+            name: "managerChoices",
+            message: "Who is the new employee's manager?",
+            choices: managerChoices,
+          },
+        ])
+        .then((answer) => {
+         let query = `INSERT INTO employee SET first_name = '${answer.first_name}',
+         last_name = '${answer.last_name}', role_id = '${answer.role_id}', manager_id = '${answer.managerChoices}';`
+         db.query(query, (err,res) => {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          console.log("Added Employee");
+          promptUser();
+         });
+        });
+      });
+     }); 
+  };
