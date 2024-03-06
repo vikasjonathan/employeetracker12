@@ -71,3 +71,12 @@ const viewAllRoles = () => {
     promptUser();
   });
 };
+// view all employes
+const viewAllEmployees = () => {
+  let query = "SELECT * FROM employee";
+  db.query(query,(err, data) => {
+    if (err) throw err;
+    console.table(data);
+    promptUser();
+  });
+};
