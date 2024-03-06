@@ -43,11 +43,21 @@ const promptUser = () => {
       } else if (choices === "Add Department") {
         addDepartment();
       } else if (choices === "Update Employee Role") {
-        updateEmployeeRole(); 
+        updateEmployeeRole();
       } else if (choices === "Exit") {
         db.end();
       } else {
         console.log("No selection was matched");
       }
     });
+};
+
+// viewAllDepartment() {
+const viewAllDepartments = () => {
+  let query = "SELECT * FROM department";
+  db.query(query, (err, data) => {
+    if (err) throw err;
+    console.table(data);
+    promptUser();
+  });
 };
