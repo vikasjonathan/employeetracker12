@@ -80,3 +80,22 @@ const viewAllEmployees = () => {
     promptUser();
   });
 };
+//function to add department
+const addDepartment = () => {
+  inquirer
+    .prompt({
+      type: "input",
+      name: "departmentName",
+      message: "What is the new department called?",
+    })
+    .then((answer) => {
+      let query = `INSERT INTO department (department_name) VALUES ("${answer.departmentName}")`;
+      connection.promise().query(query)
+      .then(() => {
+          console.log(`Added ${answer.departmentName} department`);
+          promptUser();
+        });
+
+    
+    });
+};
