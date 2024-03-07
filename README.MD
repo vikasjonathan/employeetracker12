@@ -29,3 +29,6 @@ https://github.com/vikasjonathan/employeetracker12 then open a new branch
 and submit any changes by making a pull request.
 
 ## Links
+Github link: https://github.com/vikasjonathan/employeetracker12
+
+Walkthrough: https://drive.google.com/file/d/1yC9uyeLAcdiS49xIl4D_z-Nf-Il-vsqP/view
